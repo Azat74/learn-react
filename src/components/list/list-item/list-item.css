@@ -1,3 +1,7 @@
 .list-item {
     border: 1px solid gray;
 }
+
+.list-item .title {
+    border-bottom: 1px solid gray;
+}

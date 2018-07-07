@@ -7,9 +7,11 @@ export default class ListItem extends Component {
         console.log(props);
     }
     render() {
+        const {title, text} = this.props
         return (
             <div className="list-item">
-                123
+                <div className='title'>{title}</div>
+                <div className='text'>{text}</div>
             </div>
         );
     }
