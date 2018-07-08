@@ -7,10 +7,9 @@ export default class List extends Component {
     constructor () {
         super()
         this.state = {
-            db: ['']
+            current: ''
         }
     }
-
     render() {
         const db = LIST_DB
         return (

@@ -1,0 +1,8 @@
+.list-item {
+    border: 1px solid gray;
+    padding: 5px 20px;
+    .title {
+        border-bottom: 1px solid salmon;
+        cursor: pointer;
+    }
+}
