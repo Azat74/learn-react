@@ -10,13 +10,33 @@ export default class List extends Component {
             current: ''
         }
     }
+    setCurrent = (id) => {
+        this.setState((state) => {
+            if (id === state.current) {
+                return {
+                    ...state,
+                    current: ''
+                }
+            } else {
+                return {
+                    ...state,
+                    current: id
+                }
+            }
+        })
+    }
     render() {
         const db = LIST_DB
         return (
             <div className="list">
                 {
                     db.map((item) => {
-                        return <ListItem key={`${Math.random()}`} title={item.title} text={item.text} />
+                        const id = item.title
+                        const setCurrent = () => {
+                            this.setCurrent(id)
+                        }
+                        const text = this.state.current === `${id}` ? item.text : null
+                        return <ListItem key={`${id}`} id={`${id}`} title={item.title} text={text} setCurrent={setCurrent}/>
                 })}
             </div>
         );
