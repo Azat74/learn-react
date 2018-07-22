@@ -7,10 +7,11 @@ import LIST_DB from '../../fixtures/list-db';
 
 export default class List extends Component {
   setCurrent = (id) => {
-    this.props.updateStore(`${id}`)
+    this.props.currentDispatch(`${id}`)
   }
   render() {
     const db = LIST_DB
+    console.log(this.props)
     return (
       <div className="list">
         {

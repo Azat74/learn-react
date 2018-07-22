@@ -1,16 +1,25 @@
 import React, { Component } from 'react'
 import './App.css'
 import List from './components/list/list'
+import { connect } from 'react-redux'
 
 class App extends Component {
-  state = { current: '' }
   render() {
     return (
       <div className="App">
-        <List current={this.state.current} updateStore={this.currentDispatch} />
+        <List {...this.props}/>
       </div>
     );
   }
 }
 
-export default App;
+export default connect(
+  state => ({
+    current: state.current
+  }),
+  dispatch => ({
+    currentDispatch: (current) => {
+      dispatch({type: 'setCurrent', payload: `${current}`})
+    }
+  })
+)(App)
