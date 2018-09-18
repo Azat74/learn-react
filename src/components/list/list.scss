@@ -1,0 +1,11 @@
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    .list-item {
+        margin-right: 27px;
+        margin-bottom: 20px;
+        &:nth-child(3n) {
+            margin-right: 0;
+        }
+    }
+}

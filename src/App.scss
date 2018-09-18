@@ -1,0 +1,33 @@
+@import 'styles/mixins.scss';
+@import 'styles/fonts.scss';
+
+body, html {
+    font-family: $ms-a;
+    font-size: 16px;
+    line-height: normal;
+    font-weight: 400;
+    color: #4a4a4a;
+    background: #fafafa;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+.wrapper {
+    width: 1230px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.app {
+    padding-top: 50px;
+    .el-counter {
+        margin-bottom: 15px;
+    }
+}
+
+button {
+    transition: all .2s;
+    &:active {
+        transform: scale(.9);
+    }
+}

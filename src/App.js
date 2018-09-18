@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
-import './App.css'
+import 'normalize.css'
+import './App.scss'
 import List from './components/list/list'
+import ElCounter from './components/el-counter/el-counter';
 import { connect } from 'react-redux'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <List {...this.props} />
+      <div className="app">
+        <div className='wrapper'>
+          <ElCounter />
+          <List {...this.props} />
+        </div>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ListItem from './list-item/list-item';
-import './list.css';
+import './list.scss';
 import LIST_DB from '../../fixtures/list-db';
 
 export default class List extends Component {
@@ -13,12 +13,10 @@ export default class List extends Component {
       <div className="list">
         {
           db.map((item) => {
-            const id = item.title
-            const setCurrent = () => {
-              this.setCurrent(id)
-            }
-            const text = this.props.current === `${id}` ? item.text : null
-            return <ListItem key={`${id}`} id={`${id}`} title={item.title} text={text} setCurrent={setCurrent} />
+            const id = item.item_id
+            const url = item.page_url
+            const img = item.sample_url
+            return <ListItem key={`${id}`} id={`${id}`} url={url} img={img}/>
           })}
       </div>
     );
