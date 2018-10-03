@@ -1,5 +1,8 @@
+@import 'styles/vars.scss';
 @import 'styles/mixins.scss';
 @import 'styles/fonts.scss';
+@import './components/pagination/pagination-btn/pagination-btn.scss';
+
 
 body, html {
     font-family: $ms-a;

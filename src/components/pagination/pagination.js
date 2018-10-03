@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import './pagination.scss'
+import './pagination-btn/pagination-btn'
+import PaginationBtn from './pagination-btn/pagination-btn';
 
 export default class Pagination extends Component {
     state = {
-        pages: 0,
-        arr: []
+        arr: [],
+        show: false
     }
     componentWillMount() {
         this.componentWillReceiveProps(this.props)
@@ -17,23 +19,51 @@ export default class Pagination extends Component {
                 arr: []
             }
         })
-        for (let i = 0; i < length; i++) {
-            this.setState((state) => {
+        if (length > 1) {
+            this.setState(() => {
                 return {
-                    arr: [...state.arr, i + 1]
+                    show: true
+                }
+            })
+            for (let i = 0; i < length; i++) {
+                this.setState((state) => {
+                    return {
+                        arr: [...state.arr, i + 1]
+                    }
+                })
+            }
+        } else {
+            this.setState(() => {
+                return {
+                    show: false
                 }
             })
         }
     }
     render() {
-        return (
-            <div className="pagination">
-                {
-                    this.state.arr.map(item => {
-                        return <button key={item}>{item}</button>
-                    })
-                }
-            </div>
-        );
+        const buttonPrev = this.props.currentPage !== 1 ? <button className='pagination-btn pagination-btn_prev' onClick={this.props.setPrevPage}>{'<'}</button> : null
+        const buttonNext = this.props.LIST_DB / this.props.itemsPerPage > this.props.currentPage ? <button className='pagination-btn pagination-btn_next' onClick={this.props.setNextPage}>{'>'}</button> : null
+        console.log();
+        if (this.state.show) {
+            return (
+                <div className="pagination">
+                    <div class='pagination__wrapper'>
+                        {buttonPrev}
+                        <div className='pages'>
+                            {
+                                this.state.arr.map((item, i) => {
+                                    return <PaginationBtn currentPage={item === this.props.currentPage} num={item} setCurrentPage={this.props.setCurrentPage} key={item}/>
+                                })
+                            }
+                        </div>
+                        {buttonNext}
+                    </div>
+                </div>
+            );
+        } else {
+            return (
+                <div></div>
+            )
+        }
     }
 }

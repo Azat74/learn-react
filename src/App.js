@@ -11,9 +11,12 @@ import Pagination from './components/pagination/pagination'
 class App extends Component {
   state = {
     checkItems: [],
-    LIST_DB
+    LIST_DB,
+    currentPage: 1,
+    currentPageItems: []
   }
-  itemsPerPage = 6
+  itemsPerPage = 2
+  
   checkedAction = (id) => {
     this.setState((state) => {
       if (state.checkItems.filter(item => item === id).length > 0) {
@@ -44,15 +47,75 @@ class App extends Component {
       }
     })
   }
+  setPrevPage = () => {
+    this.setState((state) => {
+      if (state.currentPage > 1) {
+        return {
+          currentPage: state.currentPage - 1
+        }
+      } else {
+        return {
+          currentPage: state.currentPage
+        }
+      }
+    })
+  }
+  setNextPage = () => {
+    this.setState((state) => {
+      if (state.currentPage < state.LIST_DB.length / this.itemsPerPage) {
+        return {
+          currentPage: state.currentPage + 1
+        }
+      } else {
+        return {
+          currentPage: state.currentPage
+        }
+      }
+    })
+  }
+  setCurrentPage = (page) => {
+    this.setState(() => {
+      return {
+        currentPage: page
+      }
+    })
+  }
+  updateCurrentItems = () => {
+    this.setState((state) => {
+      return {
+        currentPageItems: state.LIST_DB.slice(
+          (state.currentPage - 1) * this.itemsPerPage,
+          ((state.currentPage - 1) * this.itemsPerPage) + this.itemsPerPage
+        )
+      }
+    })
+  }
+  componentDidMount () {
+    this.updateCurrentItems()
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.LIST_DB.length !== prevState.LIST_DB.length || this.state.currentPage !== prevState.currentPage) {
+      this.updateCurrentItems()
+    }
+
+    this.setState((state) => {
+      if (state.currentPage > 1 && state.currentPageItems.length === 0) {
+        return {
+          currentPage: state.currentPage - 1
+        }
+      }
+    })
+  }
   render() {
+    const currentPageItems = this.state.currentPageItems
     return (
       <div className="app">
         <div className='wrapper'>
           <ElCounter count={this.state.LIST_DB.length}/>
-          <List {...this.props} LIST_DB={this.state.LIST_DB} checkedAction={this.checkedAction} deleteItem={this.deleteItem}/>
-          <Pagination LIST_DB={this.state.LIST_DB.length} itemsPerPage={this.itemsPerPage}/>
+          <List {...this.props} LIST_DB={currentPageItems} checkedAction={this.checkedAction} deleteItem={this.deleteItem}/>
+          <Pagination currentPage={this.state.currentPage} setPrevPage={this.setPrevPage} setNextPage={this.setNextPage} setCurrentPage={this.setCurrentPage} LIST_DB={this.state.LIST_DB.length} itemsPerPage={this.itemsPerPage}/>
         </div>
-        <ControlBar itemsCount={this.state.checkItems.length}/>
+        <ControlBar deleteItem={this.deleteItem} checkItems={this.state.checkItems}/>
       </div>
     );
   }

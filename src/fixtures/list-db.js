@@ -82,6 +82,13 @@ const LIST_DB = [
         "page_url": "/image-13012820",
         "sample_url": "https://www.pressfoto.ru/mediasample/s.pfst.net/2017.05/565886667567876565a8ce9b12c1229eaea92f5e78a3_b.jpg?PressFoto_13012820.jpg",
         "width": 600
+    },
+    {
+        "height": 400,
+        "item_id": 479105,
+        "page_url": "image-1738043",
+        "sample_url": "https://s.pfst.net/2012.12/17380438186a79c65f87415fbfa9ccf82515211db87_b.jpg",
+        "width": 600
     }
 ]
 

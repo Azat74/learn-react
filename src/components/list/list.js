@@ -3,9 +3,6 @@ import ListItem from './list-item/list-item';
 import './list.scss';
 
 export default class List extends Component {
-  setCurrent = (id) => {
-    this.props.currentDispatch(`${id}`)
-  }
   render() {
     const db = this.props.LIST_DB
     const {checkedAction, deleteItem} = this.props
