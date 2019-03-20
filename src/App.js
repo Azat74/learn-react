@@ -15,10 +15,10 @@ class App extends Component {
     currentPage: 1,
     currentPageItems: []
   }
-  itemsPerPage = 2
+  itemsPerPage = 6
   
-  checkedAction = (id) => {
-    this.setState((state) => {
+  checkedAction = id => {
+    this.setState(state => {
       if (state.checkItems.filter(item => item === id).length > 0) {
         return {
           checkItems: state.checkItems.filter(item => item !== id)
@@ -31,8 +31,8 @@ class App extends Component {
       }
     })
   }
-  deleteItem = (id) => {
-    this.setState((state) => {
+  deleteItem = id => {
+    this.setState(state => {
       return {
         LIST_DB: state.LIST_DB.filter(function (item) {
           if (`${item.item_id}` !== `${id}`) {
@@ -48,7 +48,7 @@ class App extends Component {
     })
   }
   setPrevPage = () => {
-    this.setState((state) => {
+    this.setState(state => {
       if (state.currentPage > 1) {
         return {
           currentPage: state.currentPage - 1
@@ -61,7 +61,7 @@ class App extends Component {
     })
   }
   setNextPage = () => {
-    this.setState((state) => {
+    this.setState(state => {
       if (state.currentPage < state.LIST_DB.length / this.itemsPerPage) {
         return {
           currentPage: state.currentPage + 1
@@ -73,7 +73,7 @@ class App extends Component {
       }
     })
   }
-  setCurrentPage = (page) => {
+  setCurrentPage = page => {
     this.setState(() => {
       return {
         currentPage: page
@@ -81,7 +81,7 @@ class App extends Component {
     })
   }
   updateCurrentItems = () => {
-    this.setState((state) => {
+    this.setState(state => {
       return {
         currentPageItems: state.LIST_DB.slice(
           (state.currentPage - 1) * this.itemsPerPage,
@@ -98,7 +98,7 @@ class App extends Component {
       this.updateCurrentItems()
     }
 
-    this.setState((state) => {
+    this.setState(state => {
       if (state.currentPage > 1 && state.currentPageItems.length === 0) {
         return {
           currentPage: state.currentPage - 1
@@ -112,10 +112,24 @@ class App extends Component {
       <div className="app">
         <div className='wrapper'>
           <ElCounter count={this.state.LIST_DB.length}/>
-          <List {...this.props} LIST_DB={currentPageItems} checkedAction={this.checkedAction} deleteItem={this.deleteItem}/>
-          <Pagination currentPage={this.state.currentPage} setPrevPage={this.setPrevPage} setNextPage={this.setNextPage} setCurrentPage={this.setCurrentPage} LIST_DB={this.state.LIST_DB.length} itemsPerPage={this.itemsPerPage}/>
+          <List {...this.props}
+            LIST_DB={currentPageItems}
+            checkedAction={this.checkedAction}
+            deleteItem={this.deleteItem}
+          />
+          <Pagination
+            currentPage={this.state.currentPage}
+            setPrevPage={this.setPrevPage}
+            setNextPage={this.setNextPage}
+            setCurrentPage={this.setCurrentPage}
+            LIST_DB={this.state.LIST_DB.length}
+            itemsPerPage={this.itemsPerPage}
+          />
         </div>
-        <ControlBar deleteItem={this.deleteItem} checkItems={this.state.checkItems}/>
+        <ControlBar
+          deleteItem={this.deleteItem}
+          checkItems={this.state.checkItems}
+        />
       </div>
     );
   }
@@ -126,7 +140,7 @@ export default connect(
     current: state.showText.current
   }),
   dispatch => ({
-    currentDispatch: (current) => {
+    currentDispatch: current => {
       dispatch({ type: 'setCurrent', payload: `${current}` })
     }
   })

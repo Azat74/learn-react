@@ -1,15 +1,35 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/vars.scss';
+
 .list {
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 15px;
-    // min-height: 660px;
+    min-height: 660px;
     justify-content: flex-start;
     align-items: flex-start;
+    @include below($d) {
+        min-height: 546.66px;
+    }
     .list-item {
         margin-right: 27px;
         margin-bottom: 20px;
-        &:nth-child(3n) {
+        @include below($d) {
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        @include below($bt) {
             margin-right: 0;
+        }
+        &:nth-child(3n) {
+            @include above(1024px) {
+                margin-right: 0;
+            }
+        }
+        &:nth-child(2n) {
+            @include below($bt) {
+                margin-left: auto;
+            }
         }
     }
 }

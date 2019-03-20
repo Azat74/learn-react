@@ -70,3 +70,29 @@
         clear: both;
     }
 }
+
+
+// =============================================================================
+// Медиа запросы
+// =============================================================================
+
+// меньше указанной величины (по умолчанию ширина)
+@mixin below($width, $orientation: 'width') {
+    @media screen and (max-#{$orientation}: $width) {
+        @content;
+    }
+}
+
+// больше указанной величины (по умолчанию ширина)
+@mixin above($width, $orientation: 'width') {
+    @media screen and (min-#{$orientation}: $width) {
+        @content;
+    }
+}
+
+// между первой и второй величиной (по умолчанию ширина)
+@mixin between($minWidth, $maxWidth, $orientation: 'width') {
+    @media screen and (min-#{$orientation}: $minWidth) and (max-#{$orientation}: $maxWidth) {
+        @content;
+    }
+}
